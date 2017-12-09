@@ -91,4 +91,26 @@ public class StringRandomizer {
 
     }
 
+    public static void writeOutput(String fname,String stringInput ,int[] indices) {
+        try {
+            FileWriter fileWriter = new FileWriter(fname);
+            // Always wrap FileWriter in BufferedWriter.
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            
+                    
+            for(int i=0; i< indices.length; i++){
+                bufferedWriter.write( stringInput.substring(indices[i])+"\r\n");
+                
+            }
+            
+            
+            bufferedWriter.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(StringRandomizer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
 }

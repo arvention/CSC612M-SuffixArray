@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class Spawner {
     
     public static int numThread = 0;
-    public static int maxThread = 1;
+    public static int maxThread = 8;
     
     public synchronized static boolean isSpawnThread(){
         if(numThread < maxThread){
@@ -25,21 +25,22 @@ public class Spawner {
     } 
     
 
-    public static void doSort(String[] suffixes, int[] indices){
-        int[] tempIdx = new int[suffixes.length];
-        String[] tempString =  new String[suffixes.length];
-        
+    public static void doSort(String inputString, int[] indices){
+        int[] tempIdx = new int[indices.length];
         
         //String[] suffixes, int[] indices,String[] tempString,int[] tempInt,int start,int end, Helper helper
-        Helper h = new Helper(suffixes ,indices, tempString, tempIdx, 0, suffixes.length-1);
+        Helper h = new Helper(inputString ,indices, tempIdx, 0, inputString.length() -1 );
         h.start();
-        
+            
          try {
             h.join();
         } catch (InterruptedException ex) {
             Logger.getLogger(MergeSort.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+       System.out.println("Finished with "+Spawner.numThread +" threads");  
+         
+         
     }
    
     

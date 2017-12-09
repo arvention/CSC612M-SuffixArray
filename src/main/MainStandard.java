@@ -17,44 +17,34 @@ public class MainStandard {
     
     public static void main(String[] args) {
         
-        System.out.println("Generating");
-        //StringRandomizer.createFile("input2.txt", 90000);
-        System.out.println("done");
         
-        //String input = StringRandomizer.readFile("input2.txt");
-        String input = "Banana$";
+        //Hi guys StringRandomizer.createFile, creates a file with random chars A C T G with $ in the end.
+        // parameter filename it will be saved and length of Stting
+        
+        //System.out.println("Generating");
+        //StringRandomizer.createFile("input2.txt", 80000);
+        //System.out.println("done");
+        
+        String input = StringRandomizer.readFile("input2.txt");
+        //String input = "Banana$";
         
         System.out.println(input.substring(0));
-        
-        String[] suffixes = new String[input.length()];
         int[] indices = new int[input.length()];
         
         for(int i = 0; i < input.length(); i++) {
-            //String s = input.substring(i);
-            //suffixes[i] = input.substring(i);
             indices[i] = i;
-            
         }
         
-        //System.out.println(Arrays.toString(suffixes));
-        //System.out.println(Arrays.toString(indices));
         long startTime = System.nanoTime();
         
-                
-        Spawner.doSort(suffixes, indices);
-        
+        Spawner.doSort(input, indices);
         long endTime = System.nanoTime();
-        System.out.println(endTime - startTime);
+        System.out.println("Time end In nanoseconds : "+ (endTime - startTime));
+        System.out.println("Now Writing output ina file.... will take some time");
         
-        
-        
-        //System.out.println(Arrays.toString(suffixes));
-        //System.out.println(Arrays.toString(indices));
-  /*      
-        divide(suffixes, indices, 0, suffixes.length - 1);
-        System.out.println(Arrays.toString(suffixes));
-        System.out.println(Arrays.toString(indices));
-*/
+        //WRITEOUTPUT OUTPUTS 3GIG FILE AT 80K CHARS SO BE WARNED...
+        //StringRandomizer.writeOutput("output.txt", input, indices);
+        System.out.println("Done!");
         
     }
     

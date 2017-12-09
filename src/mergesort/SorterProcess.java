@@ -12,7 +12,7 @@ package mergesort;
 public class SorterProcess {
     
 
-    public static void doMergeSort(String[] a,int[] idx,int start,int end,String[] tempString, int[] tempidx){
+    public static void doMergeSort(String a,int[] idx,int start,int end,int[] tempidx){
         
         if(start >=end){
             return;
@@ -20,15 +20,15 @@ public class SorterProcess {
         
         int middle = (start + end)/2;
         //Left side
-        doMergeSort(a,idx ,start,middle,tempString, tempidx);
+        doMergeSort(a,idx ,start,middle, tempidx);
         //right side
-        doMergeSort(a, idx,middle+1,end,tempString,tempidx);
-        mergeHalves(a,idx,start, end, tempString,tempidx);
+        doMergeSort(a, idx,middle+1,end,tempidx);
+        mergeHalves(a,idx,start, end,tempidx);
         
         
     }
     
-    public static void mergeHalves(String[] a,int[] idx,int start,int end,String[] tempString,int[] tempidx){
+    public static void mergeHalves(String a,int[] idx,int start,int end,int[] tempidx){
         int size = end - start +1;
 
         int middle = (start + end)/2;
@@ -40,24 +40,24 @@ public class SorterProcess {
             
             if(left <= middle && right <= end){
          
-                if( a[left].compareToIgnoreCase(a[right]) <= 0){
+                if( a.substring(idx[left]).compareToIgnoreCase( a.substring(idx[right])) <= 0){
                     
-                    tempString[i] = a[left];
+              
                     tempidx[i] = idx[left];
                     left++;
                 }else{
-                    tempString[i] = a[right];
+              
                     tempidx[i] = idx[right];
                     right++;
                 }
                    
             }else if(left > middle){
-                tempString[i] = a[right];
+          
                  tempidx[i] = idx[right];
                 right++;
                 
             }else{
-                tempString[i] = a[left];
+         
                 tempidx[i] = idx[left];
                 left++;
                 
@@ -65,7 +65,7 @@ public class SorterProcess {
                 
         }
         
-        System.arraycopy(tempString, start, a, start,size);
+     
         System.arraycopy(tempidx, start, idx,start,size);
     }
     

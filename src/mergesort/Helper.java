@@ -17,28 +17,26 @@ import static mergesort.SorterProcess.mergeHalves;
 public class Helper extends Thread{
     
     private int start,end,mid;
-    private String[] tempString,suffixes;
+    private String inputString;
     private int[] indices, tempind;
     
     private Helper helper;
 
     //suffixes ,indices, tempString, tempIdx, 0, suffixes.length-1
-    public Helper(String[] suffixes, int[] indices,String[] tempString,int[] tempInt,int start,int end){
+    public Helper(String inputString, int[] indices,int[] tempInt,int start,int end){
         this.start = start;
         this.end = end;
-        this.tempString = tempString;
+        this.inputString = inputString;
         this.tempind = tempInt;
-        this.suffixes = suffixes;
         this.indices = indices;
         this.helper = null;
         
     }
     //suffixes ,indices, tempString, tempIdx, 0, suffixes.length-1
-    public Helper(String[] suffixes, int[] indices,String[] tempString,int[] tempInt,int start,int end, Helper helper){
+    public Helper(String inputString, int[] indices,int[] tempInt,int start,int end, Helper helper){
         this.start = start;
         this.end = end;
-        this.tempString = tempString;
-        this.suffixes = suffixes;
+        this.inputString = inputString;
         this.helper = helper;
         this.indices = indices;
         this.tempind = tempInt;
@@ -58,18 +56,16 @@ public class Helper extends Thread{
         Helper h = null;
         if(Spawner.isSpawnThread()){
             //Helper h = new Helper(a ,tempString, indexes, tempIdx, 0, a.length-1);
-            h = new Helper(suffixes,indices, tempString,tempind,middle+1,end);
-            
+            h = new Helper(inputString,indices,tempind,middle+1,end,this);
             h.start();
         }else{
             //String[] a,int[] idx,int start,int end,String[] tempString, int[] tempidx
             //doMergeSort(String[] a,int[] idx,int start,int end,String[] tempString, int[] tempidx
-          
-            SorterProcess.doMergeSort(suffixes,indices,middle+1,end,tempString, tempind);
+            SorterProcess.doMergeSort(inputString,indices,middle+1,end, tempind);
         }
         
 
-        SorterProcess.doMergeSort(suffixes,indices,start,middle,tempString, tempind);
+        SorterProcess.doMergeSort(inputString,indices,start,middle, tempind);
         
                 
         if(h != null){
@@ -81,7 +77,7 @@ public class Helper extends Thread{
         }
        
         
-        SorterProcess.mergeHalves(suffixes,indices,start, end, tempString, tempind);
+        SorterProcess.mergeHalves(inputString,indices,start, end, tempind);
         
         
     }
