@@ -5,7 +5,9 @@
  */
 package main;
 
+import io.StringRandomizer;
 import java.util.Arrays;
+import mergesort.Spawner;
 
 /**
  *
@@ -15,25 +17,44 @@ public class MainStandard {
     
     public static void main(String[] args) {
         
+        System.out.println("Generating");
+        //StringRandomizer.createFile("input2.txt", 90000);
+        System.out.println("done");
+        
+        //String input = StringRandomizer.readFile("input2.txt");
         String input = "Banana$";
+        
+        System.out.println(input.substring(0));
         
         String[] suffixes = new String[input.length()];
         int[] indices = new int[input.length()];
         
         for(int i = 0; i < input.length(); i++) {
-            
-            suffixes[i] = input.substring(i);
+            //String s = input.substring(i);
+            //suffixes[i] = input.substring(i);
             indices[i] = i;
             
         }
         
-        System.out.println(Arrays.toString(suffixes));
-        System.out.println(Arrays.toString(indices));
+        //System.out.println(Arrays.toString(suffixes));
+        //System.out.println(Arrays.toString(indices));
+        long startTime = System.nanoTime();
         
+                
+        Spawner.doSort(suffixes, indices);
+        
+        long endTime = System.nanoTime();
+        System.out.println(endTime - startTime);
+        
+        
+        
+        //System.out.println(Arrays.toString(suffixes));
+        //System.out.println(Arrays.toString(indices));
+  /*      
         divide(suffixes, indices, 0, suffixes.length - 1);
-        
         System.out.println(Arrays.toString(suffixes));
         System.out.println(Arrays.toString(indices));
+*/
         
     }
     
